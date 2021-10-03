@@ -39,26 +39,26 @@ app.use(async (ctx, next) => {
     }
 });
 
-const date = new Date().toLocaleDateString();
+const date = new Date().toLocaleDateString('ru-RU');
 
 const tickets = [
     {
         id: 1,
         name: 'Тест: Заменить картридж в принтере',
         status: false,
-        created: `${date} ${new Date().toLocaleTimeString().slice(0,-3)}`
+        created: `${date} ${new Date().toLocaleTimeString('ru-RU').slice(0,-3)}`
     },
     {
         id: 2,
         name: 'Тест: Заказать канцелярские принадлежности',
         status: false,
-        created: `${date} ${new Date().toLocaleTimeString().slice(0,-3)}`
+        created: `${date} ${new Date().toLocaleTimeString('ru-RU').slice(0,-3)}`
     },
     {
         id: 3,
         name: 'Тест: Подготовить еженедельный отчет',
         status: false,
-        created: `${date} ${new Date().toLocaleTimeString().slice(0,-3)}`
+        created: `${date} ${new Date().toLocaleTimeString('ru-RU').slice(0,-3)}`
     }
 ];
 
@@ -68,21 +68,21 @@ const ticketsFull = [
         name: 'Тест: Заменить картридж в принтере',
         description: 'Тест: Найти подходящий картридж, если нет - заказать',
         status: false,
-        created: `${date} ${new Date().toLocaleTimeString().slice(0,-3)}`
+        created: `${date} ${new Date().toLocaleTimeString('ru-RU').slice(0,-3)}`
     },
     {
         id: 2,
         name: 'Тест: Заказать канцелярские принадлежности',
         description: 'Тест:  Определить каких не хватает и составить список',
         status: false,
-        created: `${date} ${new Date().toLocaleTimeString().slice(0,-3)}`
+        created: `${date} ${new Date().toLocaleTimeString('ru-RU').slice(0,-3)}`
     },
     {
         id: 3,
         name: 'Тест: Подготовить еженедельный отчет',
         description: 'Тест:  Описать что было сделано, чего удалось достичь',
         status: false,
-        created: `${date} ${new Date().toLocaleTimeString().slice(0,-3)}`
+        created: `${date} ${new Date().toLocaleTimeString('ru-RU').slice(0,-3)}`
     }
 ];
 
@@ -151,11 +151,12 @@ app.use(async ctx => {
                     }
                 })
             }
-
+            ctx.response.body = { status:"200",result:"ok" };
             break;
 
         case 'deleteTicket':
             deleteTicket(tickets, ticketsFull, id);
+            ctx.response.body = { status:"200",result:"ok" };
             break;
 
         case 'editTicket':
