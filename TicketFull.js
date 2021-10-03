@@ -5,6 +5,6 @@ module.exports =  class TicketFull {
         this.name = name;
         this.description = description;
         this.status = status;
-        this.created = `${this.date} ${new Date().toLocaleTimeString().slice(0,-3)}`;
+        this.created = `${this.date} ${new Date().toLocaleTimeString('ru-RU').slice(0,-3)}`;
     }
 }
