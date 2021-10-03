@@ -1,0 +1,23 @@
+{
+  "name": "ahj-16-homework-http",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "forever server.js",
+    "watch": "forever -w server.js"
+  },
+  "engines": {
+    "node": "14.x"
+  },
+  "author": "Nataliya2020",
+  "license": "ISC",
+  "dependencies": {
+    "forever": "^4.0.1",
+    "koa": "^2.13.3",
+    "koa-body": "^4.2.0",
+    "koa-static": "^5.0.0"
+  },
+  "devDependencies": {}
+}
