@@ -1,6 +1,6 @@
 module.exports =  class TicketFull {
     constructor(id, name, description, status) {
-        this.date = new Date().toLocaleDateString();
+        this.date = new Date().toLocaleDateString('ru-RU');
         this.id = id;
         this.name = name;
         this.description = description;
