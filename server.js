@@ -11,19 +11,12 @@ app.use(koaBody({
     multiptart: true
 }));
 
-function setNoCacheHeaders(ctx) {
-    ctx.set('Cache-Control', 'no-store, no-cache, must-revalidate')
-    ctx.set('Pragma', 'no-cache')
-    ctx.set('Expires', 0)
-}
-
 app.use(async (ctx, next) => {
     const origin = ctx.request.get('Origin');
     if (!origin) {
         return await next();
     }
 
-    setNoCacheHeaders(ctx);
     const headers = { 'Access-Control-Allow-Origin': '*' };
 
     if (ctx.request.method !== 'OPTIONS') {
@@ -41,7 +34,7 @@ app.use(async (ctx, next) => {
             'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH',
         });
         if (ctx.request.get('Access-Control-Request-Headers')) {
-            ctx.response.set('Access-Control-Allow-Headers', ctx.request.get('Access-Control-Allow-Request-Headers'));
+            ctx.response.set('Access-Control-Allow-Headers', ctx.request.get('Access-Control-Request-Headers'));
         }
         ctx.response.status = 204;
     }
@@ -111,7 +104,7 @@ function deleteTicket(arrName, arrDescription, id) {
 }
 
 function editTicket(arrDescription, id) {
-     return arrDescription.find(el => el.id === id);
+    return arrDescription.find(el => el.id === id);
 }
 
 app.use(async ctx => {
@@ -127,7 +120,7 @@ app.use(async ctx => {
             ctx.response.body = getDescription(ticketsFull, id);
             break;
         case 'createTicket':
-            let rez = JSON.parse(ctx.request.body);
+            let rez = ctx.request.body;
 
             const { name, description, status, time } = rez;
             const editId = Number(ctx.request.query.id);
@@ -179,6 +172,3 @@ app.use(async ctx => {
 
 const port = process.env.PORT || 7070;
 const server = http.createServer(app.callback()).listen(port)
-
-
-
