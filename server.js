@@ -11,11 +11,19 @@ app.use(koaBody({
     multiptart: true
 }));
 
+function setNoCacheHeaders(ctx) {
+    ctx.set('Cache-Control', 'no-store, no-cache, must-revalidate')
+    ctx.set('Pragma', 'no-cache')
+    ctx.set('Expires', 0)
+}
+
 app.use(async (ctx, next) => {
     const origin = ctx.request.get('Origin');
     if (!origin) {
         return await next();
     }
+
+    setNoCacheHeaders(ctx);
     const headers = { 'Access-Control-Allow-Origin': '*' };
 
     if (ctx.request.method !== 'OPTIONS') {
